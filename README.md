@@ -39,14 +39,14 @@ source "$SHELL_UTIL_DIR/functions.sh"
 Save these changes, then exit your editor.
 Finally, restart your shell to apply the changes.
 ## Companion Tools
+These are a few tools that can be installed alongside this config for extra functionality. Each tool has a respective config file in the `configs` directory. Some tools are geared more towards the terminal's appearance, while others are included for the features they provide.
 ### BLE: bash line editor
-Syntax highlighting for bash interactive shells.
-[Link](https://github.com/akinomyoga/ble.sh)
+Syntax highlighting and command auto-completion for bash interactive shells. If you're using zsh, there should be a plugin you can get through [zinit](https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#ice-modifiers) that does the same things.
+[BLE](https://github.com/akinomyoga/ble.sh)
 
 ### Starship: Fast and Informative prompt.
 Customizes the prompt to show additional information, like git status, version info, command status, and more.
-[Link](https://github.com/starship/starship?tab=readme-ov-file)
-
+[Starship](https://github.com/starship/starship?tab=readme-ov-file)
 
 - - - 
 # Environment
