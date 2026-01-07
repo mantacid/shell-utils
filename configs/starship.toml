@@ -1,0 +1,119 @@
+#Location: ~/.config/starship.toml
+#What_is_starship: https://starship.rs/
+
+add_newline = true
+command_timeout = 2000
+
+format = """$os$username$hostname$kubernetes$directory$python$git_branch$git_status$character
+"""
+right_format = "$status"
+
+[character]
+success_symbol = """[](fg:green)[](fg:black bg:green)[](fg:green)
+[╰⎯]( bold)"""
+error_symbol = """[](fg:red)[](fg:white bg:red)[](fg:red)
+[╰⎯](red)"""
+# ╭╴ ╰─
+
+#warp-Drop ugly default prompt characters
+#success_symbol = ""
+#error_symbol = ""
+
+# ---
+
+[os]
+format = '[╭](fg:white)[>](fg:black bg:white)'   
+disabled = false
+
+[os.symbols]
+Windows = 'Win'
+Arch = 'Arch'
+Ubuntu = 'Ubuntu'
+Macos = 'MacOS'
+Unknown = '?'
+
+# ---y
+
+# Shows the username
+[username]
+style_user = 'green'
+style_root = 'yellow'
+format = '[](fg:white bg:green)[ $user](bg:green bold fg:black)' # 2883ff
+disabled = false
+show_always = true
+
+# Shows the hostname
+[hostname]
+ssh_only = false
+format = '[](fg:green bg:black bold)[ $hostname](fg:green bg:black bold)'
+disabled = false
+
+# Shows current directory
+[directory]
+truncation_length = 0
+truncation_symbol = '…/'
+home_symbol = '~'
+# read_only_style = '197'
+read_only = '  '
+format = '[](fg:black)[─](fg:black bold)[](fg:$style)[$path](fg:blue bg:black bold)[$read_only]($read_only_style)[](fg:black)[─](fg:black bold)'
+style = '#23271e' # yellow bold 1e2723 BGR COLOR
+
+
+# Shows current git branch
+[git_branch]
+disabled = true
+# symbol = ' '
+symbol = ' '
+format = '[](fg:$style bg:yellow)[ $symbol\[$branch\] ](fg:$style bg:yellow)'
+# truncation_length = 0
+# truncation_symbol = '…/'
+style = '#23271e'
+
+# Shows current git status
+[git_status]
+disabled = true
+format = '[ $all_status $ahead_behind]($style) '
+style = 'bold green'
+conflicted = '🏳'
+up_to_date = ''
+untracked = ' '
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
+stashed = ' '
+modified = ' '
+staged = '[++\($count\)](green)'
+renamed = '襁 '
+deleted = ' '
+
+# Shows kubernetes context and namespace
+[kubernetes]
+format = 'via [󱃾 $context\($namespace\)](bold purple) '
+disabled = true
+
+# ---
+
+[vagrant]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[helm]
+disabled = true
+
+[python]
+symbol = '󰌠'
+python_binary = ['./venv/bin/python', 'python', 'python3', 'python2']
+format = '[](fg:blue)[${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )](fg:black bg:blue)[](fg:blue)[─](fg:black bold)'
+style = '#23271e'
+
+
+[nodejs]
+disabled = true
+
+[ruby]
+disabled = true
+
+[terraform]
+disabled = true
