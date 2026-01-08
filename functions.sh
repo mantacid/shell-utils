@@ -22,6 +22,33 @@ function bak() {
   $SHELL_UTIL_DIR/scripts/bak.sh "$@"
 }
 
+## trash: move something to the system trash
+function trash() {
+  ## check for $1
+  if [ $# = 0 ]; then
+	echo "$0 requires a path and optionally any additional flags accepted by 'mv'."
+	return 1
+  fi
+  
+  ## isolate target file
+  target="$1"
+  shift
+  
+  ## check for illegal flags
+  case "$@" in
+	"-t" | "--target-directory=" )
+	  echo "Illegal option. Cannot override trash directory."
+	  return 2
+	;;
+	"-T" | "--no-target-directory" )
+	  echo "Illegal flag. Cannot unset target directory."
+	  return 3
+	;;
+  esac
+  
+  mv $@ -t "$HOME/.local/share/Trash/files" "$target"
+}
+
 ## config: easily access these config files.
 ## usage: config ?[--force] <path without extension>
 ## run config help for more usage

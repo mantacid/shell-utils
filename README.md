@@ -138,6 +138,9 @@ Creates backups of files and folders. Running `bak save foo` will clone the file
 
 in reality, this function calls `$SHELL_UTIL_DIR/scripts/bak.sh`.
 
+### trash
+Moves a file to `$HOME/.local/share/Trash/files`. The first argument is the file/directory to move to the trash, and is required. subsequent arguments are optional, and can be any flag accepted by `mv`, with the exception of `-t`, `--target-directory`, `-T`, and `--no-target-directory`.
+
 ### config
 `config` takes the name of any shell file within the shell-utils repository, and opens it in your preferred editor. For example, running `config aliases` will open `aliases.sh` in the preferred editor as defined by the environment variable `$EDITOR`. Running `config` without any arguments will open the main shell configuration file, as defined in the variable `RCPATH`. Files within nested directories can also be accessed. This function will fail if no `.sh` files matching the given name can be found in the shell-util directory. Using the flag `--force` before the target will create the file at the given path relative the the shell-util directory.
 >[!NOTE]
