@@ -56,6 +56,7 @@ function config() {
 	## if there are no arguments, edit the base config file as defined by $RCPATH
 	if [ $# = 0 ]; then
 	  $EDITOR "$RCPATH"
+	  source "$RCPATH"
 	  return 0
 	fi
 	
@@ -82,11 +83,13 @@ function config() {
 	if [ -f "$SHELL_UTIL_DIR/$1.sh" ]; then
 		## File exists: don't create anything.
 		$EDITOR "$SHELL_UTIL_DIR/$1.sh"
+		source "$SHELL_UTIL_DIR/$1.sh"
 	elif $FORCE_CREATION; then
 		## File does not exist, but we've used --force, so create necessary folder structure
 		containing_dir=$(echo "$SHELL_UTIL_DIR/$1.sh" | sed 's|/[^/]*\.sh|/|g')
 		mkdir -p "$containing_dir" && touch "$SHELL_UTIL_DIR/$1.sh"
 		$EDITOR "$SHELL_UTIL_DIR/$1.sh"
+		source "$SHELL_UTIL_DIR/$1.sh"
 	else
 		## File does not exist, and we aren't forcing its creation.
 		## display error and exit.

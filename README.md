@@ -137,13 +137,14 @@ Calls `$SHELL_UTIL_DIR/scripts/pdfmerge.sh`. Expects the flag `-o` and a filenam
 Creates backups of files and folders. Running `bak save foo` will clone the file/folder `foo` and all its contents to a new file/folder `foo.bak`. Running `bak restore foo` will look for a backup of `foo` in the current directory and, if one is found, replace the original `foo` with `foo.bak`. Running `bak help` will display a similar explanation to this.
 
 in reality, this function calls `$SHELL_UTIL_DIR/scripts/bak.sh`.
+Note that you must be in the directory containing the target file/folder! Saving won't behave unexpectedly, but loading will fail if the backup is not found in the current working directory.
 
 ### trash
 Moves a file to `$HOME/.local/share/Trash/files`. The first argument is the file/directory to move to the trash, and is required. subsequent arguments are optional, and can be any flag accepted by `mv`, with the exception of `-t`, `--target-directory`, `-T`, and `--no-target-directory`.
 
 ### config
 `config` takes the name of any shell file within the shell-utils repository, and opens it in your preferred editor. For example, running `config aliases` will open `aliases.sh` in the preferred editor as defined by the environment variable `$EDITOR`. Running `config` without any arguments will open the main shell configuration file, as defined in the variable `RCPATH`. Files within nested directories can also be accessed. This function will fail if no `.sh` files matching the given name can be found in the shell-util directory. Using the flag `--force` before the target will create the file at the given path relative the the shell-util directory.
+The config will be automatically sourced by the shell, but this will not UNSET any variables.
 >[!NOTE]
 If using `zsh`, you may want to change the extension that the function checks for from `.sh` to `.zsh`. This is as simple as doing a find-and-replace using your favorite text editor.
 
-Note that you must be in the directory containing the target file/folder! Saving won't behave unexpectedly, but loading will fail if the backup is not found in the current working directory.
