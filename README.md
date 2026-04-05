@@ -104,8 +104,7 @@ If it doesn't (`||`), we then make a directory (`mkdir`) with that path (creatin
 alias le='la -la'
 ```
 
-
-## edit: edit files
+### edit: edit files
 Invokes the default editor.
 ```shell
 alias edit='$EDITOR'
