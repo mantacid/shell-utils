@@ -95,16 +95,16 @@ Oftentimes when installing a program from source, you'll be asked to make a dire
 ```shell
 alias folder='[ -d "$1" ] || mkdir -p "$1" && cd "$1"'
 ```
+#### Explanation:
+First, we use `[ -d "$1" ]` to check if the path already exists, since there's no point in doing anything if it does.
+If it doesn't (`||`), we then make a directory (`mkdir`) with that path (creating folders as needed with `-p`). If that succeeds (`&&`), we then `cd` into the newly-made directory.
 ### le
 **L**ist **E**verything
 ```shell
 alias le='la -la'
 ```
-#### Explanation:
-First, we use `[ -d "$1" ]` to check if the path already exists, since there's no point in doing anything if it does.
-If it doesn't (`||`), we then make a directory (`mkdir`) with that path (creating folders as needed with `-p`). If that succeeds (`&&`), we then `cd` into the newly-made directory.
 
-## edit: edit files
+### edit: edit files
 Invokes the default editor.
 ```shell
 alias edit='$EDITOR'
