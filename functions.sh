@@ -4,23 +4,23 @@
 ## - ghostscript (gs)
 function pdfmerge() {
   $SHELL_UTIL_DIR/scripts/pdfmerge.sh "$@"
-}
+} #DESC= Append the second pdf to the first, then save as the third argument
 
 ## folder: make and enter nested directory structures
 ## NOTE: this is usually named 'take', so i've implemented folder as a wrapper around take.
 function take() {
   [ -d "$1" ] || mkdir -p "$1" && cd "$1"
-}
+} #DESC= Create nested directory structures
 
 function folder() {
   take $@
-}
+} #DESC= Wrapper around take()
 
 ## bak: backup files and folders.
 ## no dependencies.
 function bak() {
   $SHELL_UTIL_DIR/scripts/bak.sh "$@"
-}
+} #DESC= Invoke backup utility script
 
 ## trash: move something to the system trash
 function trash() {
@@ -47,7 +47,7 @@ function trash() {
   esac
   
   mv $@ -t "$HOME/.local/share/Trash/files" "$target"
-}
+} #DESC= move a file or directory to the system trash.
 
 ## config: easily access these config files.
 ## usage: config ?[--force] <path without extension>
@@ -95,4 +95,4 @@ function config() {
 		## display error and exit.
 		echo "The target '$1' was not found or is not a .sh file. Use --force as the first argument to force its creation."
 	fi
-}
+} #DESC= Configure config files in $SHEL_UTIL_DIR using your favorite editor
