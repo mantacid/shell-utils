@@ -98,5 +98,8 @@ function config() {
 } #DESC= Configure config files in $SHELL_UTIL_DIR using your favorite editor
 
 function locate() {
-  find $(\ls $SHELL_UTIL_DIR | grep -Po "[a-zA-Z0-9\-_]+\.(z)*sh") -type f -print0 | xargs -0 grep -Po " $1(?=\(\)|\=)"
+  declare -a found_files
+  readarray -t found_files < <(ls -1 $SHELL_UTIL_DIR | \grep -Po "[a-zA-Z0-9\-_]+\.(z)*sh")
+  
+  find $(printf "$SHELL_UTIL_DIR/%s " "${found_files[@]}") -type f -print0 | xargs -0 grep -Po " $1(?=\(\)|\=)"
 } #DESC= Locate where an alias, functions, or variable is defined within this config
