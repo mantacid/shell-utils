@@ -14,7 +14,7 @@ function take() {
 
 function folder() {
   take $@
-} #DESC= Wrapper around take()
+} #DESC= Wrapper around take
 
 ## bak: backup files and folders.
 ## no dependencies.
@@ -95,4 +95,8 @@ function config() {
 		## display error and exit.
 		echo "The target '$1' was not found or is not a .sh file. Use --force as the first argument to force its creation."
 	fi
-} #DESC= Configure config files in $SHEL_UTIL_DIR using your favorite editor
+} #DESC= Configure config files in $SHELL_UTIL_DIR using your favorite editor
+
+function locate() {
+  find $(\ls $SHELL_UTIL_DIR | grep -Po "[a-zA-Z0-9\-_]+\.(z)*sh") -type f -print0 | xargs -0 grep -Po " $1(?=\(\)|\=)"
+} #DESC= Locate where an alias, functions, or variable is defined within this config
