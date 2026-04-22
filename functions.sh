@@ -4,23 +4,34 @@
 ## - ghostscript (gs)
 function pdfmerge() {
   $SHELL_UTIL_DIR/scripts/pdfmerge.sh "$@"
-} #DESC= Append the second pdf to the first, then save as the third argument
+} #DESC= concatenate pdfs together.
+#USAGE= pdfmerge -o output.pdf first.pdf second.pdf ... 
+#ENDUSAGE%
 
 ## folder: make and enter nested directory structures
 ## NOTE: this is usually named 'take', so i've implemented folder as a wrapper around take.
 function take() {
   [ -d "$1" ] || mkdir -p "$1" && cd "$1"
 } #DESC= Create nested directory structures
+#USAGE= take <NAME>
+#ENDUSAGE%
 
 function folder() {
   take $@
 } #DESC= Wrapper around take
+#USAGE= folder <NAME>
+#ENDUSAGE%
 
 ## bak: backup files and folders.
 ## no dependencies.
 function bak() {
   $SHELL_UTIL_DIR/scripts/bak.sh "$@"
 } #DESC= Invoke backup utility script
+#USAGE= bak [save|restore|help] <FILE>
+# save : back up a file/folder recursively.
+# restore : restore a backed-up file/folder structure.
+# help : prints a more detailed help message.
+#ENDUSAGE%
 
 ## trash: move something to the system trash
 function trash() {
@@ -48,6 +59,9 @@ function trash() {
   
   mv $@ -t "$HOME/.local/share/Trash/files" "$target"
 } #DESC= move a file or directory to the system trash.
+#USAGE= trash <PATH> [OPTIONS]
+# [OPTIONS] can be any flag recognized by the mv command, with the exception of -t/--target-directory and -T/--no-target-directory
+#ENDUSAGE%
 
 ## config: easily access these config files.
 ## usage: config ?[--force] <path without extension>
@@ -96,6 +110,10 @@ function config() {
 		echo "The target '$1' was not found or is not a .sh file. Use --force as the first argument to force its creation."
 	fi
 } #DESC= Configure config files in $SHELL_UTIL_DIR using your favorite editor
+#USAGE= config <FILENAME> [--force,--help]
+# --force: force file creation if the file does not already exist.
+# --help: print a help message.
+#ENDUSAGE%
 
 function locate() {
   declare -a found_files
@@ -103,3 +121,5 @@ function locate() {
   
   find $(printf "$SHELL_UTIL_DIR/%s " "${found_files[@]}") -type f -print0 | xargs -0 grep -Po " $1(?=\(\)|\=)"
 } #DESC= Locate where an alias, functions, or variable is defined within this config
+#USAGE= locate <NAME>
+#ENDUSAGE%
